@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import Chartjs from "chart.js";
 
-const randomInt = () => Math.floor(Math.random() * (10 - 1 + 1)) + 1;
+
 
 const chartConfig = {
     type: 'bubble',
@@ -11,12 +11,12 @@ const chartConfig = {
             label: '# of Votes',
             data: [12, 19, 3, 5, 2, 3],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+              "rgba(255, 99, 132, 0.2)",
+              "rgba(54, 162, 235, 0.2)",
+              "rgba(255, 206, 86, 0.2)",
+              "rgba(75, 192, 192, 0.2)",
+              "rgba(153, 102, 255, 0.2)",
+              "rgba(255, 159, 64, 0.2)"
             ],
             borderColor: [
                 'rgba(255, 99, 132, 1)',
@@ -34,12 +34,12 @@ const chartConfig = {
             yAxes: [{
                 ticks: {
                     beginAtZero: true,
-                	fontColor:"rgb(220, 220, 220)"
+                
                 }
             }],
            xAxes: [{
                 ticks: {
-                	fontColor:"rgb(220, 220, 220)"
+                
                 }
             }]
         },
@@ -47,7 +47,6 @@ const chartConfig = {
             display: true,
             text: "Performances CPU",
             fontSize:25,
-            fontColor:"rgb(220, 220, 220)"
         }
     }
 };
@@ -63,28 +62,19 @@ const CPULogs = () => {
     }
   }, [chartContainer]);
 
-  const updateDataset = (datasetIndex, newData) => {
-    chartInstance.data.datasets[datasetIndex].data = newData;
-    chartInstance.update();
-  };
+  // const updateDataset = (datasetIndex, newData) => {
+  //   chartInstance.data.datasets[datasetIndex].data = newData;
+  //   chartInstance.update();
+  // };
 
-  const onButtonClick = () => {
-    const data = [
-      randomInt(),
-      randomInt(),
-      randomInt(),
-      randomInt(),
-      randomInt(),
-      randomInt()
-    ];
-    updateDataset(0, data);
-  };
+ 
 
   return (
-    <div>
-      <button onClick={onButtonClick}>Randomize!</button>
+    <Fragment>
+    <div className="card">
       <canvas ref={chartContainer} />
     </div>
+    </Fragment>
   );
 };
 

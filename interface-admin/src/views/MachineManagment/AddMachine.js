@@ -1,19 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useContext, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState, } from "react";
+// import { useHistory } from "react-router-dom";
 import image from "../../assets/images/logo.png";
-import { AppContext } from "../../context/AppContext";
+// import { AppContext } from "../../context/AppContext";
 import { css } from "@emotion/core";
 import ClipLoader from "react-spinners/ClipLoader";
 
 function AddMachine() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isError, setIsError] = useState(false);
   const [inputs, setInputs] = useState({ email: " ", password: "" });
-  const { ApiServices } = useContext(AppContext);
-  const { authentificationService } = ApiServices;
+
   const [Loading, setLoading] = useState(false);
-  const history = useHistory();
+ 
 
  
 

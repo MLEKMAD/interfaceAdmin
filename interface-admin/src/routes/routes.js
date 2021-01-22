@@ -1,6 +1,7 @@
 import HomePage from "../views/HomePage/HomePage";
 import PageNotFound from "../views/components/PageNotFound";
-import AddMachine from "../views/Auth/AddMachine"
+import AddMachine from "../views/MachineManagment/AddMachine"
+import ChooseMachine from "../views/MachineManagment/ChooseMachine"
 
 
 import {
@@ -13,20 +14,30 @@ import {
 
 
 
-  
+
 const machineManagementPaths = {
-  isDropdown: false,
+  title: "Machines management",
+  isDropdown: true,
+  icon: SettingsIcon,
   routes: [
     {
       title: "Add machine",
-      path: "/login",
+      path: "/addMachine",
       component: AddMachine,
       icon: SettingsIcon,
       inMenu: true,
     },
+    {
+      title: "Choose machine",
+      path: "/choosemachine",
+      component: ChooseMachine,
+      icon: SettingsIcon,
+      inMenu: true,
+    },
+    
     
   ],
-}
+};
 
 const communPathsCategory = {
   isDropdown: false,

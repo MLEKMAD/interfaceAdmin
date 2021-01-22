@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import Chartjs from "chart.js";
 
 const randomInt = () => Math.floor(Math.random() * (10 - 1 + 1)) + 1;
@@ -34,12 +34,12 @@ const chartConfig = {
             yAxes: [{
                 ticks: {
                     beginAtZero: true,
-                	fontColor:"rgb(220, 220, 220)"
+                	
                 }
             }],
            xAxes: [{
                 ticks: {
-                	fontColor:"rgb(220, 220, 220)"
+               
                 }
             }]
         },
@@ -47,7 +47,7 @@ const chartConfig = {
             display: true,
             text: "Erreurs 404/ad. IP",
             fontSize:25,
-            fontColor:"rgb(220, 220, 220)"
+    
         }
     }
 };
@@ -63,28 +63,16 @@ const Logs = () => {
     }
   }, [chartContainer]);
 
-  const updateDataset = (datasetIndex, newData) => {
-    chartInstance.data.datasets[datasetIndex].data = newData;
-    chartInstance.update();
-  };
+  // const updateDataset = (datasetIndex, newData) => {
+  //   chartInstance.data.datasets[datasetIndex].data = newData;
+  //   chartInstance.update();
+  // };
 
-  const onButtonClick = () => {
-    const data = [
-      randomInt(),
-      randomInt(),
-      randomInt(),
-      randomInt(),
-      randomInt(),
-      randomInt()
-    ];
-    updateDataset(0, data);
-  };
-
+ 
   return (
-    <div>
-      <button onClick={onButtonClick}>Randomize!</button>
+    <Fragment>
       <canvas ref={chartContainer} />
-    </div>
+    </Fragment>
   );
 };
 

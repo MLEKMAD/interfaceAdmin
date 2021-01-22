@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
-import { Route as ReactRoute, Redirect } from "react-router-dom";
-import { AppContext } from "../context/AppContext";
+import React from "react";
+import { Route as ReactRoute } from "react-router-dom";
+//import { AppContext } from "../context/AppContext";
 
 const Route = ({ component: Component }) => {
 

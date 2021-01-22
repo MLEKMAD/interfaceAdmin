@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState,Fragment } from "react";
 import Chartjs from "chart.js";
+import PageHeader from "./PageHeader";
 
 const randomInt = () => Math.floor(Math.random() * (10 - 1 + 1)) + 1;
 
@@ -34,25 +35,22 @@ const chartConfig = {
             yAxes: [{
                 ticks: {
                     beginAtZero: true,
-                	fontColor:"rgb(220, 220, 220)"
                 }
             }],
            xAxes: [{
                 ticks: {
-                	fontColor:"rgb(220, 220, 220)"
                 }
             }]
         },
         legend:{
         	labels:{
-        		fontColor:"rgb(230, 230, 230)",
         	}
         },
         title: {
             display: true,
             text: "Logs en fonction de l'IP",
             fontSize:25,
-            fontColor:"rgb(220, 220, 220)"
+            
         }
     }
 };
@@ -80,10 +78,10 @@ const RAM = () => {
   };
 
   return (
-    <div>
-      <button onClick={onButtonClick}>Randomize!</button>
+    <Fragment>
       <canvas ref={chartContainer} />
-    </div>
+      
+    </Fragment>
   );
 };
 

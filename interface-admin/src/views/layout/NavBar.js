@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import { withRouter } from "react-router-dom";
 
-import { AppContext } from "../../context/AppContext";
+//import { AppContext } from "../../context/AppContext";
 
 import Logo from "./Logo";
 
