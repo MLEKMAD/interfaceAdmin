@@ -17,12 +17,17 @@ const HomePage = () => {
 const [machineName,setMachineName] = useState("");
 const [cpuModel,setCpuModel] = useState("");
 useEffect(() => {
-  setMachineName("Machine")
+  console.log(localStorage.getItem("currentMachine"))
+  const name = localStorage.getItem("currentMachine");
+  if(name != "null"){
+    setMachineName(name)
+  }
+ 
   setCpuModel('32-bit')
-}, [])
+}, [machineName])
   return (
     <div className="page ">
-      <PageHeader title={`Hello ${machineName}, Your CPU model is ${cpuModel}`}/>
+      <PageHeader title={machineName ? `Hello ${machineName}, Your CPU model is ${cpuModel}`: "Global Dashbord" }/>
     <div className="page-single">
       <div className="row row-cards row-deck">
       <div className="col col-md-6 mx-auto">

@@ -9,8 +9,11 @@ import ListMachine from "../components/ListMachine"
 const Researchers = () => {
   const [machines, setMachines] = useState([]);
 useEffect(() => {
-    setMachines(["All The machines","machine1","machine2"])
-    
+    const listMachines = ["All The machines","machine1","machine2"]
+    if (localStorage.getItem("newMachine") !== null) {
+        listMachines.push(JSON.parse(localStorage.getItem("newMachine")).username)
+      }
+      setMachines(listMachines)
 }, [])
 
   return (

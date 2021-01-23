@@ -1,16 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, } from "react";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import image from "../../assets/images/logo.png";
 // import { AppContext } from "../../context/AppContext";
 import { css } from "@emotion/core";
 import ClipLoader from "react-spinners/ClipLoader";
+import makeApiServices from "../../api/ApiServices";
+import PageHeader from "../components/PageHeader";
 
 function AddMachine() {
-  const [inputs, setInputs] = useState({ email: " ", password: "" });
+  const [inputs, setInputs] = useState({ machineAddress: " ",username:"", password: "" });
 
   const [Loading, setLoading] = useState(false);
- 
+  const history = useHistory();
 
  
 
@@ -25,7 +27,15 @@ function AddMachine() {
   };
 
   const handleSubmit = async (event) => {
-    
+    event.preventDefault();  
+    console.log("inputs",inputs)
+    // try {
+    //     const response = await makeApiServices
+    // } catch (error) {
+      
+    // }
+    localStorage.setItem('newMachine',JSON.stringify(inputs))
+    history.push("/");
   };
 
   return (
@@ -35,6 +45,7 @@ function AddMachine() {
           <div className="row">
           <div className=" mb-8 mt-7">
                 <img src={image} className="h-8" alt="" />
+                <br></br><PageHeader  title="Moni'TSE"/>
               </div>
             <div className="col col-md-4 mx-auto">
               
@@ -51,14 +62,14 @@ function AddMachine() {
                       name="machineAddress"
                       type="text"
                       className="form-control"
-                      placeholder="Adresse email"
+                      placeholder="Address"
                     />
                   </div>
                   <div className="mb-3">
                     <label className="form-label">Username</label>
                     <input
                       onChange={handleInputsChange}
-                      value={inputs.password}
+                      value={inputs.username}
                       type="text"
                       name="username"
                       className="form-control"

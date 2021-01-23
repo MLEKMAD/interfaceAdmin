@@ -36,10 +36,39 @@ const SettingsIcon = () => (
     <circle cx="12" cy="12" r="3" />
   </svg>
 );
+const StatisticsIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="icon icon-tabler icon-tabler-chart-area-line"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    strokeWidth="2"
+    stroke="currentColor"
+    fill="none"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" />
+    <polyline points="4 19 8 13 12 15 16 10 20 14 20 19 4 19" />
+    <polyline points="4 12 7 8 11 10 16 4 20 8" />
+  </svg>
+);
 
-
-export {
-  HomeIcon,
-  SettingsIcon,
-
-};
+const LogsIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    fill="none"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z" />
+    <path d="M14 3v5h5M16 13H8M16 17H8M10 9H8" />
+  </svg>
+);
+export { HomeIcon, SettingsIcon, StatisticsIcon, LogsIcon };
