@@ -64,7 +64,9 @@ const HD = () => {
 
   return (
     <Fragment>
+       <div className="card">
       <canvas ref={chartContainer} />
+    </div>
     </Fragment>
   );
 };

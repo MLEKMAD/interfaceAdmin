@@ -1,18 +1,22 @@
 import axios from "axios";
 
-import { makeStatisticsService } from "./services";
+import { makeServerServices } from "./services";
+
+const API_URL = "http://localhost:5000"
 
 const makeApiServices = () => {
   const backendApi = axios.create({
-    baseURL: process.env.REACT_APP_BACKEND_URL + "/api",
+    baseURL: API_URL,
     timeout: 10000,
     headers: {
       "Content-Type": "application/json",
+      'Access-Control-Allow-Origin' : '*',
+      'Access-Control-Allow-Methods' : 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
     },
   });
 
   return {
-    statisticsService: makeStatisticsService(backendApi),
+    serverService: makeServerServices(backendApi),
   };
 };
 

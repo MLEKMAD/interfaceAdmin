@@ -3196,7 +3196,7 @@
   "resolved" "https://registry.npmjs.org/chardet/-/chardet-0.7.0.tgz"
   "version" "0.7.0"
 
-"chart.js@^2.9.4":
+"chart.js@^2.3", "chart.js@^2.9.4", "chart.js@>= 2.7.0 < 3":
   "integrity" "sha512-B07aAzxcrikjAPyV+01j7BmOpxtQETxTSlQ26BEYJ+3iUkbNKaOJ/nDbT6JjyqYxseM0ON12COHYdU2cTIjC7A=="
   "resolved" "https://registry.npmjs.org/chart.js/-/chart.js-2.9.4.tgz"
   "version" "2.9.4"
@@ -3218,6 +3218,11 @@
   dependencies:
     "chartjs-color-string" "^0.6.0"
     "color-convert" "^1.9.3"
+
+"chartjs-plugin-streaming@^1.8.0":
+  "integrity" "sha512-r7kHyNvSAz12J+W5FBmI/K400z4MXqfNYhA5xaTKJ6PA3ZA6Vq+2d5/OCGyVZF/7UsUDWDRK5tHHYj8jqe+nOg=="
+  "resolved" "https://registry.npmjs.org/chartjs-plugin-streaming/-/chartjs-plugin-streaming-1.8.0.tgz"
+  "version" "1.8.0"
 
 "chokidar@^2.1.8":
   "integrity" "sha512-ZmZUazfOzf0Nve7duiCKD23PFSCs4JPoYyccjUFF3aQkQadqBhfzhjkwBH2mNOG9cTBwhamM37EIsIkZw3nRgg=="
@@ -9563,6 +9568,14 @@
   dependencies:
     "c3" "^0.4.11"
 
+"react-chartjs-2@^2.11.1":
+  "integrity" "sha512-G7cNq/n2Bkh/v4vcI+GKx7Q1xwZexKYhOSj2HmrFXlvNeaURWXun6KlOUpEQwi1cv9Tgs4H3kGywDWMrX2kxfA=="
+  "resolved" "https://registry.npmjs.org/react-chartjs-2/-/react-chartjs-2-2.11.1.tgz"
+  "version" "2.11.1"
+  dependencies:
+    "lodash" "^4.17.19"
+    "prop-types" "^15.7.2"
+
 "react-collapsible@^2.8.0":
   "integrity" "sha512-ykV+EpCBYC6UoOsZLtBxrs/kFVgJc2gFMU1/SS2JLG+LrMHSOERpWSG+fexyFYk44hdfJRmc/If+HlSjXcbCiw=="
   "resolved" "https://registry.npmjs.org/react-collapsible/-/react-collapsible-2.8.1.tgz"
@@ -9598,7 +9611,7 @@
     "strip-ansi" "6.0.0"
     "text-table" "0.2.0"
 
-"react-dom@^16.12.0":
+"react-dom@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0", "react-dom@^16.12.0":
   "integrity" "sha512-1gCeQXDLoIqMgqD3IO2Ah9bnf0w9kzhwN5q4FGnHZ67hBm9yePzB5JJAIQCc8x3pFnNlwFq4RidZggNAAkzWWw=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-16.14.0.tgz"
   "version" "16.14.0"
@@ -9746,7 +9759,7 @@
   dependencies:
     "@emotion/core" "^10.0.15"
 
-"react@^16.12.0":
+"react@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0", "react@^16.12.0":
   "integrity" "sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g=="
   "resolved" "https://registry.npmjs.org/react/-/react-16.14.0.tgz"
   "version" "16.14.0"

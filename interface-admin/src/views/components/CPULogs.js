@@ -3,52 +3,87 @@ import Chartjs from "chart.js";
 
 
 
+import 'chartjs-plugin-streaming';
+
+
+const chartColors = {
+	red: 'rgb(255, 99, 132)',
+	orange: 'rgb(255, 159, 64)',
+	yellow: 'rgb(255, 205, 86)',
+	green: 'rgb(75, 192, 192)',
+	blue: 'rgb(54, 162, 235)',
+	purple: 'rgb(153, 102, 255)',
+	grey: 'rgb(201, 203, 207)'
+};
+
+
+
+// This function will be async and it will call the backend for data
+// then push the data here 
+ const onRefresh = (chart) => {
+	chart.config.data.datasets.forEach((dataset,index) => {
+    index === 0 ? 
+    dataset.data.push({
+			x: Date.now(),
+			y: 2
+    })
+    :
+    dataset.data.push({
+			x: Date.now(),
+			y: 4
+    })
+	});
+}
+
+
 const chartConfig = {
-    type: 'bubble',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.2)",
-              "rgba(54, 162, 235, 0.2)",
-              "rgba(255, 206, 86, 0.2)",
-              "rgba(75, 192, 192, 0.2)",
-              "rgba(153, 102, 255, 0.2)",
-              "rgba(255, 159, 64, 0.2)"
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true,
-                
-                }
-            }],
-           xAxes: [{
-                ticks: {
-                
-                }
-            }]
-        },
-        title: {
-            display: true,
-            text: "Performances CPU",
-            fontSize:25,
-        }
-    }
+  type: 'line',
+	data: {
+		datasets: [{
+			label: 'CPU',
+			borderColor: chartColors.red,
+			fill: false,
+			cubicInterpolationMode: 'monotone',
+			data: []
+		}, {
+			label: 'performance',
+			borderColor: chartColors.blue,
+			fill: false,
+			cubicInterpolationMode: 'monotone',
+			data: []
+		}]
+	},
+	options: {
+		title: {
+			display: true,
+			text: 'CPU'
+		},
+		scales: {
+			xAxes: [{
+				type: 'realtime',
+				realtime: {
+					duration: 200000,
+					refresh: 10000,
+					delay: 20000,
+					onRefresh: onRefresh
+				}
+			}],
+			yAxes: [{
+				scaleLabel: {
+					display: true,
+					labelString: 'value'
+				}
+			}]
+		},
+		tooltips: {
+			mode: 'nearest',
+			intersect: false
+		},
+		hover: {
+			mode: 'nearest',
+			intersect: false
+		}
+	}
 };
 
 const CPULogs = () => {

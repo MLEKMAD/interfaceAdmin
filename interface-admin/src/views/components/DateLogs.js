@@ -69,7 +69,9 @@ const DateLogs = () => {
 
   return (
     <Fragment>
+      <div className="card">
       <canvas ref={chartContainer} />
+    </div>
     </Fragment>
   );
 };
