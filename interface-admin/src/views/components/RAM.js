@@ -26,19 +26,22 @@ const chartColors = {
 // then push the data here 
  const onRefresh = async (chart) => {
     const response = await serverService.getRamInfo();
-    console.log(response)
-    chart.config.data.datasets.forEach((dataset,index) => {
-      index === 0 ? 
-      dataset.data.push({
-        x: Date.now(),
-        y: 2
-      })
-      :
-      dataset.data.push({
-        x: Date.now(),
-        y: 4
-      })
-    });
+    if (response.data) {
+		const data = response.data
+		chart.config.data.datasets.forEach((dataset,index) => {
+			index === 0 ? 
+			dataset.data.push({
+			  x: Date.now(),
+			  y: data['total memory']
+			})
+			:
+			dataset.data.push({
+			  x: Date.now(),
+			  y: data['used memory']
+			})
+		  });
+	}
+    
 }
 
 
@@ -78,6 +81,9 @@ const chartConfig = {
 				scaleLabel: {
 					display: true,
 					labelString: 'value'
+				},
+				ticks: {
+					beginAtZero: true
 				}
 			}]
 		},

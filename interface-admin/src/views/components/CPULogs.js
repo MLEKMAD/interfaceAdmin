@@ -1,10 +1,11 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import Chartjs from "chart.js";
-
-
-
 import 'chartjs-plugin-streaming';
+import makeApiServices from "../../api/ApiServices";
 
+
+const ApiServices = makeApiServices();
+const {serverService} = ApiServices;
 
 const chartColors = {
 	red: 'rgb(255, 99, 132)',
@@ -20,19 +21,25 @@ const chartColors = {
 
 // This function will be async and it will call the backend for data
 // then push the data here 
- const onRefresh = (chart) => {
-	chart.config.data.datasets.forEach((dataset,index) => {
-    index === 0 ? 
-    dataset.data.push({
-			x: Date.now(),
-			y: 2
-    })
-    :
-    dataset.data.push({
-			x: Date.now(),
-			y: 4
-    })
-	});
+const onRefresh = async (chart) => {
+    const response = await serverService.getCpuInfo();
+    if (response.data) {
+		const data = response.data
+		console.log("CPU:",data)
+		chart.config.data.datasets.forEach((dataset,index) => {
+			index === 0 ? 
+			dataset.data.push({
+			  x: Date.now(),
+			  y: 4
+			})
+			:
+			dataset.data.push({
+			  x: Date.now(),
+			  y: 2
+			})
+		  });
+	}
+    
 }
 
 
@@ -72,6 +79,9 @@ const chartConfig = {
 				scaleLabel: {
 					display: true,
 					labelString: 'value'
+				},
+				ticks: {
+					beginAtZero: true
 				}
 			}]
 		},
