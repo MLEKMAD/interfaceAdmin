@@ -3,7 +3,7 @@ import { render } from "react-dom";
 import { Router, Switch } from "react-router-dom";
 
 import { createBrowserHistory } from "history";
-import { AppProvider } from "./context/AppContext";
+
 
 import Route from "./routes/Route";
 
@@ -24,13 +24,13 @@ import "bootstrap/dist/js/bootstrap";
 const history = createBrowserHistory();
 
 const App = () => (
-  <AppProvider>
+ 
     <Router history={history}>
       <Switch>   
         <Route path="/*" component={MainLayout} />
       </Switch>
     </Router>
-  </AppProvider>
+ 
 );
 
 const MainLayout = () => {

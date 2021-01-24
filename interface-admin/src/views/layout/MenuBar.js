@@ -2,7 +2,7 @@ import React, { useContext, Fragment } from "react";
 import { withRouter, Link } from "react-router-dom";
 
 import { getMenu } from "./Menus";
-import { AppContext } from "../../context/AppContext";
+
 
 const MenuBar = withRouter(({ history, location, ...props }) => {
 

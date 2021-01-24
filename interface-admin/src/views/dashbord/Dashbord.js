@@ -13,7 +13,7 @@ import CPULogs from "../components/CPULogs";
 import HD from "../components/HD";
 import PageHeader from "../components/PageHeader";
 
-const HomePage = () => {
+const Dashbord = () => {
 const [machineName,setMachineName] = useState("");
 const [cpuModel,setCpuModel] = useState("");
 useEffect(() => {
@@ -59,4 +59,4 @@ useEffect(() => {
   );
 };
 
-export default HomePage;
+export default Dashbord;

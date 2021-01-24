@@ -1,4 +1,4 @@
-import HomePage from "../views/HomePage/HomePage";
+import Dashbord from "../views/dashbord/Dashbord";
 import PageNotFound from "../views/components/PageNotFound";
 import AddMachine from "../views/MachineManagment/AddMachine"
 import ChooseMachine from "../views/MachineManagment/ChooseMachine"
@@ -60,7 +60,7 @@ const communPathsCategory = {
     {
       title: "Dashbords",
       path: "/",
-      component: HomePage,
+      component: Dashbord,
       icon: StatisticsIcon,
       inMenu: true,
     },

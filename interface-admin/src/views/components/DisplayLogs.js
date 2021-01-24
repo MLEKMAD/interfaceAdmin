@@ -6,16 +6,12 @@ import React, {
     useContext,
     useCallback,
   } from "react";
-  import { AppContext } from "../../context/AppContext";
   import CRUDTable from "../components/CRUDTable";
   import PageHeader from "../components/PageHeader";
   import { useHistory } from "react-router-dom";
   
   const DisplayLogs = () => {
-    const history = useHistory();
-    const { ApiServices } = useContext(
-      AppContext
-    );
+   
    const [logs, setLogs] = useState([])
   
     const columns = ["Time", "state", "event"];
