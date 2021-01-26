@@ -9,11 +9,11 @@ import ListMachine from "../components/ListMachine"
 const Researchers = () => {
   const [machines, setMachines] = useState([]);
 useEffect(() => {
-    const listMachines = ["All The machines","machine1","machine2"]
+    const listMachines = [{isdifferent:true,username :"All The machines"},{username:"interfadm",ip_address:"monitorme1.ddns.net",password:"Projet654!"},{username:"interfadm",ip_address:"monitorme2.ddns.net",password:"Projet654!"},{username:"user",ip_address:"192.168.43.198",password:"user"}]
     if (localStorage.getItem("newMachine") !== null) {
-        listMachines.push(JSON.parse(localStorage.getItem("newMachine")).username)
+        listMachines.push(JSON.parse(localStorage.getItem("newMachine")))
       }
-      setMachines(listMachines)
+      setMachines([... new Set(listMachines)])
 }, [])
 
   return (
@@ -31,10 +31,10 @@ useEffect(() => {
                 className="list  overflow-auto list-row list-hoverable"
               >
                 {machines
-                  .map(( name, index) => (
+                  .map(( item, index) => (
                     <ListMachine
                       key={index}
-                      machine={name}
+                      machine={item}
                     />
                   ))}
               </div>

@@ -9,7 +9,7 @@ import makeApiServices from "../../api/ApiServices";
 import PageHeader from "../components/PageHeader";
 
 function AddMachine() {
-  const [inputs, setInputs] = useState({ machineAddress: " ",username:"", password: "" });
+  const [inputs, setInputs] = useState({ ip_adress: " ",username:"", password: "" });
 
   const [Loading, setLoading] = useState(false);
   const history = useHistory();

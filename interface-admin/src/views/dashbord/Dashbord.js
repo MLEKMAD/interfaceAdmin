@@ -14,24 +14,28 @@ import HD from "../components/HD";
 import PageHeader from "../components/PageHeader";
 
 const Dashbord = () => {
-const [machineName,setMachineName] = useState("");
+const [machine,setMachine] = useState({username:"",ip_address:"",password:""});
 const [cpuModel,setCpuModel] = useState("");
+const [isMachine, setIsMachine] = useState(false);
 useEffect(() => {
-  console.log(localStorage.getItem("currentMachine"))
-  const name = localStorage.getItem("currentMachine");
-  if(name != "null"){
-    setMachineName(name)
+  const tempMachine = JSON.parse(localStorage.getItem("currentMachine"));
+  if(tempMachine.hasOwnProperty('isDifferent')){
+      setIsMachine(false)
+  }
+  else{
+    setIsMachine(true);
+    setMachine(tempMachine)
   }
  
   setCpuModel('32-bit')
-}, [machineName])
+}, [])
   return (
     <div className="page ">
-      <PageHeader title={machineName ? `Hello ${machineName}, Your CPU model is ${cpuModel}`: "Global Dashbord" }/>
+      <PageHeader title={isMachine ? `Hello ${machine.username}, Your CPU model is ${cpuModel}`: "Global Dashbord" }/>
     <div className="page-single">
       <div className="row row-cards row-deck">
       <div className="col col-md-6 mx-auto">
-      <RAM />
+      <RAM machine={machine} />
       </div>
       <div className="col col-md-6 mx-auto">
         <CPULogs/>

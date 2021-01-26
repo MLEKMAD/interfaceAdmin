@@ -22,85 +22,115 @@ const chartColors = {
 
 
 
-// This function will be async and it will call the backend for data
-// then push the data here 
- const onRefresh = async (chart) => {
-    const response = await serverService.getRamInfo();
-    if (response.data) {
-		const data = response.data
+
+
+
+const RAM = () => {
+	const chartContainer = useRef(null);
+	const [chartInstance, setChartInstance] = useState(null);
+	const [RAMData,setRAMData] = useState({});
+	const [isMachine, setIsMachine] = useState(false);
+
+	useEffect(  () => {
+		 const getRAMData = async () => {
+			const tempMachine = JSON.parse(localStorage.getItem("currentMachine"));
+		console.log(tempMachine)
+		if(tempMachine.hasOwnProperty('isDifferent')){
+			setIsMachine(false)
+		}
+		else{
+		setIsMachine(true);
+		const response = await serverService.getRamInfo(tempMachine);
+		if(response.data){
+			setRAMData(response.data)
+		}
+		
+		}
+		}
+		getRAMData();
+		
+	})
+	
+
+	// This function will be async and it will call the backend for data
+	// then push the data here 
+	const onRefresh = async (chart) => {	
+	if(isMachine){	
+    	if (RAMData) {
 		chart.config.data.datasets.forEach((dataset,index) => {
 			index === 0 ? 
 			dataset.data.push({
 			  x: Date.now(),
-			  y: data['total memory']
+			  y: RAMData['total memory']
 			})
 			:
 			dataset.data.push({
 			  x: Date.now(),
-			  y: data['used memory']
+			  y: RAMData['used memory']
 			})
 		  });
 	}
+	else throw Error()
+	}
+    
     
 }
 
-
 const chartConfig = {
-  type: 'line',
-	data: {
-		datasets: [{
-			label: 'Total Memory',
-			borderColor: chartColors.red,
-			fill: false,
-			cubicInterpolationMode: 'monotone',
-			data: []
-		}, {
-			label: 'Used Memory',
-			borderColor: chartColors.blue,
-			fill: false,
-			cubicInterpolationMode: 'monotone',
-			data: []
-		}]
-	},
-	options: {
-		title: {
-			display: true,
-			text: 'Memory'
-		},
-		scales: {
-			xAxes: [{
-				type: 'realtime',
-				realtime: {
-					duration: 200000,
-					refresh: 10000,
-					delay: 20000,
-					onRefresh: onRefresh
-				}
-			}],
-			yAxes: [{
-				scaleLabel: {
-					display: true,
-					labelString: 'value'
-				},
-				ticks: {
-					beginAtZero: true
-				}
-			}]
-		},
-		tooltips: {
-			mode: 'nearest',
-			intersect: false
-		},
-		hover: {
-			mode: 'nearest',
-			intersect: false
-		}
-	}
-};
+	type: 'line',
+	  data: {
+		  datasets: [{
+			  label: 'Total Memory',
+			  borderColor: chartColors.red,
+			  fill: false,
+			  cubicInterpolationMode: 'monotone',
+			  data: []
+		  }, {
+			  label: 'Used Memory',
+			  borderColor: chartColors.blue,
+			  fill: false,
+			  cubicInterpolationMode: 'monotone',
+			  data: []
+		  }]
+	  },
+	  options: {
+		  title: {
+			  display: true,
+			  text: 'Memory'
+		  },
+		  scales: {
+			  xAxes: [{
+				  type: 'realtime',
+				  realtime: {
+					  duration: 200000,
+					  refresh: 10000,
+					  delay: 20000,
+					  onRefresh: onRefresh
+				  }
+			  }],
+			  yAxes: [{
+				  scaleLabel: {
+					  display: true,
+					  labelString: 'value'
+				  },
+				  ticks: {
+					  beginAtZero: true
+				  }
+			  }]
+		  },
+		  tooltips: {
+			  mode: 'nearest',
+			  intersect: false
+		  },
+		  hover: {
+			  mode: 'nearest',
+			  intersect: false
+		  }
+	  }
+  };
+  
 
-const RAM = () => {
-  const chartContainer = useRef(null);
-  const [chartInstance, setChartInstance] = useState(null);
+
 
   useEffect(() => {
     if (chartContainer && chartContainer.current) {

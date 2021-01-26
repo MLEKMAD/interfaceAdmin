@@ -19,25 +19,46 @@ const chartColors = {
 
 
 
+
+const CPULogs = () => {
+	const [machine,setMachine] = useState({username:"",ip_address:"",password:""});
+	const [isMachine, setIsMachine] = useState(false);
+	
+	useEffect(() => {
+	  const tempMachine = JSON.parse(localStorage.getItem("currentMachine"));
+	  if(tempMachine.hasOwnProperty('isDifferent')){
+		  setIsMachine(false)
+	  }
+	  else{
+		setIsMachine(true);
+		setMachine(tempMachine)
+	  }
+	}, [])
+	
+
+
 // This function will be async and it will call the backend for data
 // then push the data here 
 const onRefresh = async (chart) => {
-    const response = await serverService.getCpuInfo();
-    if (response.data) {
-		const data = response.data
-		console.log("CPU:",data)
-		chart.config.data.datasets.forEach((dataset,index) => {
-			index === 0 ? 
-			dataset.data.push({
-			  x: Date.now(),
-			  y: 4
-			})
-			:
-			dataset.data.push({
-			  x: Date.now(),
-			  y: 2
-			})
-		  });
+	if(isMachine){
+	const response = await serverService.getCpuInfo(machine);
+		if (response.data) {
+			const data = response.data
+			console.log("CPU:",data)
+			chart.config.data.datasets.forEach((dataset,index) => {
+				index === 0 ? 
+				dataset.data.push({
+				  x: Date.now(),
+				  y: 4
+				})
+				:
+				dataset.data.push({
+				  x: Date.now(),
+				  y: 2
+				})
+			  });
+		}
+		
 	}
     
 }
@@ -95,8 +116,6 @@ const chartConfig = {
 		}
 	}
 };
-
-const CPULogs = () => {
   const chartContainer = useRef(null);
   const [chartInstance, setChartInstance] = useState(null);
 
