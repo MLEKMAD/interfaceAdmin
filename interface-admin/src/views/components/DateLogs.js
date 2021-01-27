@@ -4,49 +4,63 @@ import Chartjs from "chart.js";
 const randomInt = () => Math.floor(Math.random() * (10 - 1 + 1)) + 1;
 
 const chartConfig = {
-    type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true,
-                }
-            }],
-           xAxes: [{
-                ticks: {
-                }
-            }]
+  type: "pie",
+  data: {
+    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    datasets: [
+      {
+        label: "# of Votes",
+        data: [12, 19, 3, 5, 2, 3],
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.5)",
+          "rgba(54, 162, 235, 0.5)",
+          "rgba(255, 206, 86, 0.5)",
+          "rgba(75, 192, 192, 0.5)",
+          "rgba(153, 102, 255, 0.5)",
+          "rgba(255, 159, 64, 0.5)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(75, 192, 192, 1)",
+          "rgba(153, 102, 255, 1)",
+          "rgba(255, 159, 64, 1)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  },
+  options: {
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,
+            fontColor: "rgb(220, 220, 220)",
+          },
         },
-        title: {
-            display: true,
-            text: "Nbre logs/ad. IP",
-            fontSize:25,
-        }
-    }
+      ],
+      xAxes: [
+        {
+          ticks: {
+            fontColor: "rgb(220, 220, 220)",
+          },
+        },
+      ],
+    },
+    legend: {
+      labels: {
+        fontColor: "rgb(230, 230, 230)",
+      },
+    },
+    title: {
+      display: true,
+      text: "Logs en fonction de l'IP",
+      fontSize: 25,
+      fontColor: "rgb(220, 220, 220)",
+    },
+  },
 };
 
 const DateLogs = () => {
@@ -65,13 +79,11 @@ const DateLogs = () => {
   //   chartInstance.update();
   // };
 
- 
-
   return (
     <Fragment>
-      <div className="card">
-      <canvas ref={chartContainer} />
-    </div>
+      <div className='card'>
+        <canvas ref={chartContainer} />
+      </div>
     </Fragment>
   );
 };

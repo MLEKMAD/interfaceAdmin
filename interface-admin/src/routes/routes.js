@@ -1,8 +1,7 @@
 import Dashbord from "../views/dashbord/Dashbord";
 import PageNotFound from "../views/components/PageNotFound";
-import AddMachine from "../views/MachineManagment/AddMachine"
-import ChooseMachine from "../views/MachineManagment/ChooseMachine"
-
+import AddMachine from "../views/MachineManagment/AddMachine";
+import ChooseMachine from "../views/MachineManagment/ChooseMachine";
 
 import {
   HomeIcon,
@@ -11,12 +10,6 @@ import {
   LogsIcon,
 } from "../views/components/icons";
 import DisplayLogs from "../views/components/DisplayLogs";
-
-
-
-
-
-
 
 const machineManagementPaths = {
   title: "Machines management",
@@ -32,13 +25,11 @@ const machineManagementPaths = {
     },
     {
       title: "Choose machine",
-      path: "/choosemachine",
+      path: "/",
       component: ChooseMachine,
       icon: SettingsIcon,
       inMenu: true,
     },
-    
-    
   ],
 };
 const logsPath = {
@@ -51,7 +42,6 @@ const logsPath = {
       icon: LogsIcon,
       inMenu: true,
     },
-    
   ],
 };
 const communPathsCategory = {
@@ -59,15 +49,13 @@ const communPathsCategory = {
   routes: [
     {
       title: "Dashbords",
-      path: "/",
+      path: "/dashbord",
       component: Dashbord,
       icon: StatisticsIcon,
       inMenu: true,
     },
-    
   ],
 };
-
 
 const errorPathsCategory = {
   title: "Errors",
