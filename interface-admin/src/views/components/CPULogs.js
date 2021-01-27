@@ -38,7 +38,6 @@ const CPULogs = () => {
         });
         data.push({ item: "CPU(s)", value: response.data["CPU(s)"] });
         data.push({ item: "Model name", value: response.data["Model name"] });
-        console.log("DATA", data);
         setCpuData(data);
       }
     } catch (error) {

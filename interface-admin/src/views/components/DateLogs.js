@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import Chartjs from "chart.js";
 
-const randomInt = () => Math.floor(Math.random() * (10 - 1 + 1)) + 1;
+
 
 const chartConfig = {
   type: "pie",

@@ -83,7 +83,6 @@ const HD = () => {
       case "G":
         intValue = parseFloat(value) * 1024;
     }
-    console.log("intvalue", intValue);
     return intValue;
   };
 
