@@ -9,7 +9,7 @@ const ApiServices = makeApiServices();
 const {serverService} = ApiServices;
 
 const HD = () => {
-  const data = {
+  const [data , setData] = useState({
     labels: [],
     datasets: [
       {
@@ -36,7 +36,7 @@ const HD = () => {
         data: [],
       }
     ]
-  }
+  })
   const convertToMega = (value) => {
     let intValue = 0 ;
     switch(value.charAt(value.length-1)){
@@ -49,22 +49,25 @@ const HD = () => {
     }
     return intValue;
   }
+
   const getHardDriveInfo = useCallback(async (machine) =>{
       const response = await serverService.getHdInfo(machine)
       if(response.data){
         console.log('response', response.data)
+        const tempData = data
          for(const item in response.data){
-            data.labels.push(item)
-            data.datasets[0]['data'].push(convertToMega(response.data[item]))
-
+            tempData.labels.push(item)
+            tempData.datasets[0]['data'].push(convertToMega(response.data[item]))
          }
+         setData(tempData)
       }
-  },[serverService])
+  },[data])
  
 useEffect(() => {
   const machine = JSON.parse(localStorage.getItem("currentMachine"));
   getHardDriveInfo(machine)
-}, [])
+  console.log("PIE",data)
+}, [data])
   // const updateDataset = (datasetIndex, newData) => {
   //   chartInstance.data.datasets[datasetIndex].data = newData;
   //   chartInstance.update();
@@ -75,7 +78,7 @@ useEffect(() => {
   return (
     <Fragment>
        <div className="card">
-      <Pie data={data}
+         {data.datasets[0]['data'].length != 0 ? <Pie data={data}
           options={{
             title:{
               display:true,
@@ -86,7 +89,8 @@ useEffect(() => {
               display:true,
               position:'right'
             }
-          }} />
+          }} />: <h3>Loading...</h3> }
+     
     </div>
     </Fragment>
   );
