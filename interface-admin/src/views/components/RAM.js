@@ -28,50 +28,32 @@ const chartColors = {
 const RAM = () => {
 	const chartContainer = useRef(null);
 	const [chartInstance, setChartInstance] = useState(null);
-	const [RAMData,setRAMData] = useState({});
-	const [isMachine, setIsMachine] = useState(false);
 
-	useEffect(  () => {
-		 const getRAMData = async () => {
-			const tempMachine = JSON.parse(localStorage.getItem("currentMachine"));
-		console.log(tempMachine)
-		if(tempMachine.hasOwnProperty('isDifferent')){
-			setIsMachine(false)
-		}
-		else{
-		setIsMachine(true);
-		const response = await serverService.getRamInfo(tempMachine);
-		if(response.data){
-			setRAMData(response.data)
-		}
-		
-		}
-		}
-		getRAMData();
-		
-	})
+	
+	
 	
 
 	// This function will be async and it will call the backend for data
 	// then push the data here 
-	const onRefresh = async (chart) => {	
-	if(isMachine){	
-    	if (RAMData) {
-		chart.config.data.datasets.forEach((dataset,index) => {
-			index === 0 ? 
-			dataset.data.push({
-			  x: Date.now(),
-			  y: RAMData['total memory']
-			})
-			:
-			dataset.data.push({
-			  x: Date.now(),
-			  y: RAMData['used memory']
-			})
-		  });
-	}
-	else throw Error()
-	}
+	const onRefresh = async (chart) => {
+		const machine = JSON.parse(localStorage.getItem("currentMachine"));
+		const response = await serverService.getRamInfo(machine)
+		if(response.data){
+			chart.config.data.datasets.forEach((dataset,index) => {
+				index === 0 ? 
+				dataset.data.push({
+				  x: Date.now(),
+				  y: response.data["total memory"]
+				})
+				:
+				dataset.data.push({
+				  x: Date.now(),
+				  y: response.data["used memory"]
+				})
+			  });
+		}	
+		
+		else throw Error()
     
     
 }

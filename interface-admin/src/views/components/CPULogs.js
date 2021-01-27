@@ -21,26 +21,14 @@ const chartColors = {
 
 
 const CPULogs = () => {
-	const [machine,setMachine] = useState({username:"",ip_address:"",password:""});
-	const [isMachine, setIsMachine] = useState(false);
 	
-	useEffect(() => {
-	  const tempMachine = JSON.parse(localStorage.getItem("currentMachine"));
-	  if(tempMachine.hasOwnProperty('isDifferent')){
-		  setIsMachine(false)
-	  }
-	  else{
-		setIsMachine(true);
-		setMachine(tempMachine)
-	  }
-	}, [])
 	
 
 
 // This function will be async and it will call the backend for data
 // then push the data here 
 const onRefresh = async (chart) => {
-	if(isMachine){
+	const machine = JSON.parse(localStorage.getItem("currentMachine"));
 	const response = await serverService.getCpuInfo(machine);
 		if (response.data) {
 			const data = response.data
@@ -59,8 +47,7 @@ const onRefresh = async (chart) => {
 			  });
 		}
 		
-	}
-    
+	
 }
 
 
