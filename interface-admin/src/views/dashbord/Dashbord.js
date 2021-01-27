@@ -12,11 +12,17 @@ import Logs from "../components/Logs";
 import CPULogs from "../components/CPULogs";
 import HD from "../components/HD";
 import PageHeader from "../components/PageHeader";
+import makeApiServices from "../../api/ApiServices";
+
+const ApiServices = makeApiServices();
+const {serverService} = ApiServices;
 
 const Dashbord = () => {
 const [machine,setMachine] = useState({username:"",ip_address:"",password:""});
-const [cpuModel,setCpuModel] = useState("");
+const [ipAddress, setIpAddress] = useState("");
 const [isMachine, setIsMachine] = useState(false);
+
+
 useEffect(() => {
   const tempMachine = JSON.parse(localStorage.getItem("currentMachine"));
   if(tempMachine.hasOwnProperty('isDifferent')){
@@ -27,36 +33,45 @@ useEffect(() => {
     setMachine(tempMachine)
   }
  
-  setCpuModel('32-bit')
+
 }, [])
+useEffect(()=> {
+  const getIpAddress = async()=>{
+  let myMachine = JSON.parse(localStorage.getItem("currentMachine"));
+  try{
+    const {data} =  await serverService.getNetInfo(myMachine);
+    if(data){
+      setIpAddress(data['ip address'])
+    }
+ }
+ catch (error) {
+  console.log(error.response, error.message); 
+}
+  }
+  getIpAddress()
+},[])
   return (
     <div className="page ">
-      <PageHeader title={isMachine ? `Hello ${machine.username}, Your CPU model is ${cpuModel}`: "Global Dashbord" }/>
+      <PageHeader title={isMachine ? `Hello ${machine.username}, your IP address is ${ipAddress}`: "Global Dashbord" }/>
+      <div className="" >
+        <CPULogs/>
+      </div>
     <div className="page-single">
       <div className="row row-cards row-deck">
       <div className="col col-md-6 mx-auto">
       <RAM machine={machine} />
       </div>
       <div className="col col-md-6 mx-auto">
-        <CPULogs/>
-      </div>
-     
+      <HD />
+      </div> 
       </div>
       <div className="row row-cards row-deck">
-      <div className="col col-md-6 mx-auto">
-      <HD />
-      </div>
       <div className="col col-md-6 mx-auto">
         <Logs/>
       </div>
-     
-      </div>
-      <div className="row row-cards row-deck">
       <div className=" center col col-md-6 mx-auto">
       <DateLogs />
       </div>
-      
-     
       </div>
       </div>
       </div>

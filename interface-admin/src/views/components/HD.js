@@ -9,7 +9,7 @@ const ApiServices = makeApiServices();
 const {serverService} = ApiServices;
 
 const HD = () => {
-  const [data , setData] = useState({
+  const data = {
     labels: [],
     datasets: [
       {
@@ -36,7 +36,7 @@ const HD = () => {
         data: [],
       }
     ]
-  })
+  }
   const convertToMega = (value) => {
     let intValue = 0 ;
     switch(value.charAt(value.length-1)){
@@ -50,18 +50,21 @@ const HD = () => {
     return intValue;
   }
 
-  const getHardDriveInfo = useCallback(async (machine) =>{
+  const getHardDriveInfo = async (machine) =>{
+    try{
       const response = await serverService.getHdInfo(machine)
       if(response.data){
-        console.log('response', response.data)
-        const tempData = data
          for(const item in response.data){
-            tempData.labels.push(item)
-            tempData.datasets[0]['data'].push(convertToMega(response.data[item]))
+            data.labels.push(item)
+            data.datasets[0]['data'].push(convertToMega(response.data[item]))
          }
-         setData(tempData)
       }
-  },[data])
+    }
+     
+      catch (error) {
+        console.log(Object.keys(error), error.message); 
+      }
+  }
  
 useEffect(() => {
   const machine = JSON.parse(localStorage.getItem("currentMachine"));

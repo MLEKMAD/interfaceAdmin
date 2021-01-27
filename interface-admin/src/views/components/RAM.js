@@ -37,23 +37,28 @@ const RAM = () => {
 	// then push the data here 
 	const onRefresh = async (chart) => {
 		const machine = JSON.parse(localStorage.getItem("currentMachine"));
-		const response = await serverService.getRamInfo(machine)
-		if(response.data){
-			chart.config.data.datasets.forEach((dataset,index) => {
-				index === 0 ? 
-				dataset.data.push({
-				  x: Date.now(),
-				  y: response.data["total memory"]
-				})
-				:
-				dataset.data.push({
-				  x: Date.now(),
-				  y: response.data["used memory"]
-				})
-			  });
-		}	
+		try{
+			const {data} = await serverService.getRamInfo(machine)
+			if(data){
+				chart.config.data.datasets.forEach((dataset,index) => {
+					index === 0 ? 
+					dataset.data.push({
+					x: Date.now(),
+					y: data["total memory"]
+					})
+					:
+					dataset.data.push({
+					x: Date.now(),
+					y: data["used memory"]
+					})
+				});
+			}	
 		
-		else throw Error()
+		}catch (error) {
+			console.log(error.response, error.message); 
+		  }
+		
+		
     
     
 }
