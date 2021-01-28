@@ -1,18 +1,26 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import image from "../../assets/images/illustrations/undraw_no_result_found.svg";
 
-const NoResultFound = ({ query }) => (
+const NoResultFound = () => {
+  
+ 
+  return(
   <div className='container empty'>
     <div className='empty-icon'>
       <img src={image} className='h-8 mb-4' alt='' />
     </div>
     <p className='empty-title h3'>
-      Aucun résultat trouvé {query ? "pour " + query : ""}
+     Your machine is down or it takes so much time to respond
     </p>
     <p className='empty-subtitle text-muted'>
-      Essayez d'ajuster votre recherche ou votre filtre
+      Check your machine and try again
     </p>
+    <div>
+    
+    </div>
+
   </div>
-);
+  )};
 
 export default NoResultFound;

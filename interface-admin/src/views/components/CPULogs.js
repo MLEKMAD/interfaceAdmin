@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useRef, useState } from "react";
 import Chartjs from "chart.js";
 import "chartjs-plugin-streaming";
 import makeApiServices from "../../api/ApiServices";
+import { useHistory } from "react-router-dom";
 
 const ApiServices = makeApiServices();
 const { serverService } = ApiServices;
@@ -17,6 +18,7 @@ const chartColors = {
 };
 
 const CPULogs = () => {
+  const history = useHistory();
   const [cpuData, setCpuData] = useState();
 
   // This function will be async and it will call the backend for data
@@ -42,8 +44,10 @@ const CPULogs = () => {
       }
     } catch (error) {
       console.log(Object.keys(error), error.message);
+      
     }
   };
+
 
   useEffect(() => {
     getData();

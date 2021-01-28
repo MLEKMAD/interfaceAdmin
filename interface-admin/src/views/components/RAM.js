@@ -10,6 +10,7 @@ import PageHeader from "./PageHeader";
 import makeApiServices from "../../api/ApiServices";
 
 import "chartjs-plugin-streaming";
+import { useHistory } from "react-router-dom";
 
 const ApiServices = makeApiServices();
 const { serverService } = ApiServices;
@@ -24,7 +25,11 @@ const chartColors = {
   grey: "rgb(201, 203, 207)",
 };
 
+
 const RAM = () => {
+
+  
+  const history = useHistory();
   const chartContainer = useRef(null);
   const [chartInstance, setChartInstance] = useState(null);
 
@@ -48,10 +53,10 @@ const RAM = () => {
         });
       }
     } catch (error) {
-      console.log(error.response, error.message);
+      console.log(error.config, error.message);
     }
   };
-
+  
   const chartConfig = {
     type: "line",
     data: {

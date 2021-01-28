@@ -13,11 +13,13 @@ import CPULogs from "../components/CPULogs";
 import HD from "../components/HD";
 import PageHeader from "../components/PageHeader";
 import makeApiServices from "../../api/ApiServices";
+import NoResultFound from '../components/NoResultFound'
 
 const ApiServices = makeApiServices();
 const { serverService } = ApiServices;
 
 const Dashbord = () => {
+  const [seconds, setSeconds] = useState(0)
   const [machine, setMachine] = useState({
     username: "",
     ip_address: "",
@@ -49,12 +51,33 @@ const Dashbord = () => {
     };
     getIpAddress();
   }, []);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds(seconds => seconds + 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
   return (
     <div className='page '>
+      {seconds > 60 && !ipAddress ?
+      <div className='empty'>
+       <NoResultFound /> 
+       <div>
+       <button
+      type='submit'
+      className='btn btn-block  btn-primary '
+      onClick={() => {setSeconds(0)}}
+    >
+      Try again
+    </button>
+    </div>
+       </div>
+       :
+      <div>
       <PageHeader
         title={
           isMachine
-            ? `Hello ${machine.username}, your IP address is ${ipAddress}`
+            ? `For ${machine.username}, The IP address is ${ipAddress}`
             : "Global Dashbord"
         }
       />
@@ -70,15 +93,9 @@ const Dashbord = () => {
             <HD />
           </div>
         </div>
-        <div className='row row-cards row-deck'>
-          <div className='col col-md-6 mx-auto'>
-            <Logs />
-          </div>
-          <div className=' center col col-md-6 mx-auto'>
-            <DateLogs />
-          </div>
-        </div>
       </div>
+      </div>
+      }
     </div>
   );
 };

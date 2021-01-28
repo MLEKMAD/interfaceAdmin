@@ -8,11 +8,13 @@ import React, {
 import Chartjs from "chart.js";
 
 import makeApiServices from "../../api/ApiServices";
+import { useHistory } from "react-router-dom";
 
 const ApiServices = makeApiServices();
 const { serverService } = ApiServices;
 
 const HD = () => {
+  const history = useHistory();
   const chartConfig = {
     type: "pie",
     data: {
